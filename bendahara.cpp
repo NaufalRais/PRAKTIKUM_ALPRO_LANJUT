@@ -39,6 +39,17 @@ void TampilPemasukanTahunan();
 void TampilPemasukanBulanan();
 void TampilPengeluaranTahunan();
 void TampilPengeluaranBulanan();
+
+// Deklarasi fungsi sorting
+void sortTanggalPemasukan();
+void sortTanggalPengeluaran();
+void sortTahunPemasukan();
+void sortTahunPengeluaran();
+void sortBulanPemasukan();
+void sortBulanPengeluaran();
+void sortSemuaPemasukan();
+void sortSemuaPengeluaran();
+
 bool validasiTanggal(int tanggal, int bulan, int tahun);
 bool inputTanggal(int &tanggal, int &bulan, int &tahun);
 
@@ -237,22 +248,26 @@ void TampilCatatan(){
 
 void TampilPemasukan(){
     int menu;
-    cout << "Pilih jenis tampilan pemasukan:\n";
-    cout << "1. Tahunan\n";
-    cout << "2. Bulanan\n";
+    cout << "\n===== MENU TAMPILAN PEMASUKAN =====\n";
+    cout << "1. Berdasarkan Tahun (terurut)\n";
+    cout << "2. Berdasarkan Bulan (terurut)\n";
+    cout << "3. Berdasarkan Tanggal (terurut lengkap)\n";
     cout << "Pilihan: ";
     cin >> menu;
 
     switch (menu){
     case 1: TampilPemasukanTahunan(); break;
     case 2: TampilPemasukanBulanan(); break;
+    case 3: sortSemuaPemasukan(); break;
     default: cout << "Pilihan tidak valid.\n"; break;
     }
 }
 
 void TampilPemasukanTahunan() {
+    sortTahunPemasukan();
+    
     int tahun;
-    cout << "Masukkan pemasukkan tahun yang ingin ditampilkan: ";
+    cout << "Masukkan tahun pemasukan yang ingin ditampilkan: ";
     cin >> tahun;
 
     cout << "\n===== DATA PEMASUKAN TAHUN " << tahun << " =====\n";
@@ -262,7 +277,8 @@ void TampilPemasukanTahunan() {
             cout << "ID: " << daftarPemasukan[i].id 
                  << " | " << daftarPemasukan[i].nama 
                  << " | Rp" << daftarPemasukan[i].nominal
-                 << " | " << daftarPemasukan[i].tanggal << "/" << daftarPemasukan[i].bulan << "/" << daftarPemasukan[i].tahun << endl;
+                 << " | " << daftarPemasukan[i].tanggal << "/" 
+                 << daftarPemasukan[i].bulan << "/" << daftarPemasukan[i].tahun << endl;
             adaData = true;
         }
     }
@@ -272,10 +288,12 @@ void TampilPemasukanTahunan() {
 }
 
 void TampilPemasukanBulanan() {
+    sortBulanPemasukan();
+
     int bulan, tahun;
-    cout << "Masukkan pemasukkan bulan (1-12): ";
+    cout << "Masukkan bulan (1-12): ";
     cin >> bulan;
-    cout << "Masukkan pemasukkan tahun: ";
+    cout << "Masukkan tahun: ";
     cin >> tahun;
 
     cout << "\n===== DATA PEMASUKAN BULAN " << bulan << " TAHUN " << tahun << " =====\n";
@@ -285,7 +303,8 @@ void TampilPemasukanBulanan() {
             cout << "ID: " << daftarPemasukan[i].id 
                  << " | " << daftarPemasukan[i].nama 
                  << " | Rp" << daftarPemasukan[i].nominal
-                 << " | " << daftarPemasukan[i].tanggal << "/" << daftarPemasukan[i].bulan << "/" << daftarPemasukan[i].tahun << endl;
+                 << " | " << daftarPemasukan[i].tanggal << "/" 
+                 << daftarPemasukan[i].bulan << "/" << daftarPemasukan[i].tahun << endl;
             adaData = true;
         }
     }
@@ -296,22 +315,26 @@ void TampilPemasukanBulanan() {
 
 void TampilPengeluaran() {
     int menu;
-    cout << "Pilih jenis tampilan pengeluaran:\n";
-    cout << "1. Tahunan\n";
-    cout << "2. Bulanan\n";
+    cout << "\n===== MENU TAMPILAN PENGELUARAN =====\n";
+    cout << "1. Berdasarkan Tahun (terurut)\n";
+    cout << "2. Berdasarkan Bulan (terurut)\n";
+    cout << "3. Berdasarkan Tanggal (terurut lengkap)\n";
     cout << "Pilihan: ";
     cin >> menu;
 
     switch (menu){
     case 1: TampilPengeluaranTahunan(); break;
     case 2: TampilPengeluaranBulanan(); break;
+    case 3: sortSemuaPengeluaran(); break;
     default: cout << "Pilihan tidak valid.\n"; break;
     }
 }
 
 void TampilPengeluaranTahunan() {
+    sortTahunPengeluaran();
+
     int tahun;
-    cout << "Masukkan pengeluaran tahun yang ingin ditampilkan: ";
+    cout << "Masukkan tahun pengeluaran yang ingin ditampilkan: ";
     cin >> tahun;
 
     cout << "\n===== DATA PENGELUARAN TAHUN " << tahun << " =====\n";
@@ -321,7 +344,8 @@ void TampilPengeluaranTahunan() {
             cout << "ID: " << daftarPengeluaran[i].id 
                  << " | " << daftarPengeluaran[i].nama 
                  << " | Rp" << daftarPengeluaran[i].nominal
-                 << " | " << daftarPengeluaran[i].tanggal << "/" << daftarPengeluaran[i].bulan << "/" << daftarPengeluaran[i].tahun << endl;
+                 << " | " << daftarPengeluaran[i].tanggal << "/" 
+                 << daftarPengeluaran[i].bulan << "/" << daftarPengeluaran[i].tahun << endl;
             adaData = true;
         }
     }
@@ -331,10 +355,12 @@ void TampilPengeluaranTahunan() {
 }
 
 void TampilPengeluaranBulanan() {
+    sortBulanPengeluaran();
+
     int bulan, tahun;
-    cout << "Masukkan pengeluaran bulan (1-12): ";
+    cout << "Masukkan bulan (1-12): ";
     cin >> bulan;
-    cout << "Masukkan pengeluaran tahun: ";
+    cout << "Masukkan tahun: ";
     cin >> tahun;
 
     cout << "\n===== DATA PENGELUARAN BULAN " << bulan << " TAHUN " << tahun << " =====\n";
@@ -344,7 +370,8 @@ void TampilPengeluaranBulanan() {
             cout << "ID: " << daftarPengeluaran[i].id 
                  << " | " << daftarPengeluaran[i].nama 
                  << " | Rp" << daftarPengeluaran[i].nominal
-                 << " | " << daftarPengeluaran[i].tanggal << "/" << daftarPengeluaran[i].bulan << "/" << daftarPengeluaran[i].tahun << endl;
+                 << " | " << daftarPengeluaran[i].tanggal << "/" 
+                 << daftarPengeluaran[i].bulan << "/" << daftarPengeluaran[i].tahun << endl;
             adaData = true;
         }
     }
@@ -358,15 +385,50 @@ void riwayat() {
 
     int menu;
     cout << "Pilih jenis riwayat yang ingin ditampilkan:\n";
-    cout << "1. Tahunan\n";
-    cout << "2. Bulanan\n";
+    cout << "1. Tahunan (terurut tahun)\n";
+    cout << "2. Bulanan (terurut bulan per tahun)\n";
+    cout << "3. Lengkap (terurut tanggal)\n";
     cout << "Pilihan: ";
     cin >> menu;
     
     switch (menu){
-    case 1: TampilPemasukanTahunan(); cout << endl; TampilPengeluaranTahunan(); break;
-    case 2: TampilPemasukanBulanan(); cout << endl; TampilPengeluaranBulanan(); break;
-    default: cout << "Pilihan tidak valid.\n"; break;
+    case 1: 
+        sortTahunPemasukan();
+        sortTahunPengeluaran();
+        TampilPemasukanTahunan(); 
+        cout << endl; 
+        TampilPengeluaranTahunan(); 
+        break;
+    case 2: 
+        sortBulanPemasukan();
+        sortBulanPengeluaran();
+        TampilPemasukanBulanan(); 
+        cout << endl; 
+        TampilPengeluaranBulanan(); 
+        break;
+    case 3:
+        sortSemuaPemasukan();
+        sortSemuaPengeluaran();
+        cout << "\n===== SEMUA DATA PEMASUKAN (TERURUT TANGGAL) =====\n";
+        for (int i = 0; i < jumlahPemasukan; i++) {
+            cout << "ID: " << daftarPemasukan[i].id 
+                 << " | " << daftarPemasukan[i].nama 
+                 << " | Rp" << daftarPemasukan[i].nominal
+                 << " | " << daftarPemasukan[i].tanggal << "/" 
+                 << daftarPemasukan[i].bulan << "/" << daftarPemasukan[i].tahun << endl;
+        }
+        cout << "\n===== SEMUA DATA PENGELUARAN (TERURUT TANGGAL) =====\n";
+        for (int i = 0; i < jumlahPengeluaran; i++) {
+            cout << "ID: " << daftarPengeluaran[i].id 
+                 << " | " << daftarPengeluaran[i].nama 
+                 << " | Rp" << daftarPengeluaran[i].nominal
+                 << " | " << daftarPengeluaran[i].tanggal << "/" 
+                 << daftarPengeluaran[i].bulan << "/" << daftarPengeluaran[i].tahun << endl;
+        }
+        break;
+    default: 
+        cout << "Pilihan tidak valid.\n"; 
+        break;
     }
 
     cout << "\n===== RINGKASAN =====\n";
@@ -394,26 +456,142 @@ void kosong() {
     cout << "-----------------------------\n";
 }
 
-// FUNGSI VALIDASI TANGGAL YANG BENAR
+// ================ FUNGSI SORTING LENGKAP ================
+
+// Sorting berdasarkan TAHUN saja (ascending)
+void sortTahunPemasukan() {
+    for (int i = 0; i < jumlahPemasukan - 1; i++) {
+        for (int j = 0; j < jumlahPemasukan - i - 1; j++) {
+            if (daftarPemasukan[j].tahun > daftarPemasukan[j + 1].tahun) {
+                swap(daftarPemasukan[j], daftarPemasukan[j + 1]);
+            }
+        }
+    }
+}
+
+void sortTahunPengeluaran() {
+    for (int i = 0; i < jumlahPengeluaran - 1; i++) {
+        for (int j = 0; j < jumlahPengeluaran - i - 1; j++) {
+            if (daftarPengeluaran[j].tahun > daftarPengeluaran[j + 1].tahun) {
+                swap(daftarPengeluaran[j], daftarPengeluaran[j + 1]);
+            }
+        }
+    }
+}
+
+// Sorting berdasarkan BULAN per TAHUN (ascending)
+void sortBulanPemasukan() {
+    for (int i = 0; i < jumlahPemasukan - 1; i++) {
+        for (int j = 0; j < jumlahPemasukan - i - 1; j++) {
+            if (daftarPemasukan[j].tahun > daftarPemasukan[j + 1].tahun) {
+                swap(daftarPemasukan[j], daftarPemasukan[j + 1]);
+            }
+            else if (daftarPemasukan[j].tahun == daftarPemasukan[j + 1].tahun) {
+                if (daftarPemasukan[j].bulan > daftarPemasukan[j + 1].bulan) {
+                    swap(daftarPemasukan[j], daftarPemasukan[j + 1]);
+                }
+            }
+        }
+    }
+}
+
+void sortBulanPengeluaran() {
+    for (int i = 0; i < jumlahPengeluaran - 1; i++) {
+        for (int j = 0; j < jumlahPengeluaran - i - 1; j++) {
+            if (daftarPengeluaran[j].tahun > daftarPengeluaran[j + 1].tahun) {
+                swap(daftarPengeluaran[j], daftarPengeluaran[j + 1]);
+            }
+            else if (daftarPengeluaran[j].tahun == daftarPengeluaran[j + 1].tahun) {
+                if (daftarPengeluaran[j].bulan > daftarPengeluaran[j + 1].bulan) {
+                    swap(daftarPengeluaran[j], daftarPengeluaran[j + 1]);
+                }
+            }
+        }
+    }
+}
+
+// Sorting lengkap berdasarkan TANGGAL, BULAN, TAHUN (ascending)
+void sortSemuaPemasukan() {
+    for (int i = 0; i < jumlahPemasukan - 1; i++) {
+        for (int j = 0; j < jumlahPemasukan - i - 1; j++) {
+            // Bandingkan tahun dulu
+            if (daftarPemasukan[j].tahun > daftarPemasukan[j + 1].tahun) {
+                swap(daftarPemasukan[j], daftarPemasukan[j + 1]);
+            }
+            // Jika tahun sama, bandingkan bulan
+            else if (daftarPemasukan[j].tahun == daftarPemasukan[j + 1].tahun) {
+                if (daftarPemasukan[j].bulan > daftarPemasukan[j + 1].bulan) {
+                    swap(daftarPemasukan[j], daftarPemasukan[j + 1]);
+                }
+                // Jika bulan sama, bandingkan tanggal
+                else if (daftarPemasukan[j].bulan == daftarPemasukan[j + 1].bulan) {
+                    if (daftarPemasukan[j].tanggal > daftarPemasukan[j + 1].tanggal) {
+                        swap(daftarPemasukan[j], daftarPemasukan[j + 1]);
+                    }
+                }
+            }
+        }
+    }
+    
+    // Tampilkan hasil sorting
+    cout << "\n===== DATA PEMASUKAN (TERURUT TANGGAL) =====\n";
+    for (int i = 0; i < jumlahPemasukan; i++) {
+        cout << "ID: " << daftarPemasukan[i].id 
+             << " | " << daftarPemasukan[i].nama 
+             << " | Rp" << daftarPemasukan[i].nominal
+             << " | " << daftarPemasukan[i].tanggal << "/" 
+             << daftarPemasukan[i].bulan << "/" << daftarPemasukan[i].tahun << endl;
+    }
+}
+
+void sortSemuaPengeluaran() {
+    for (int i = 0; i < jumlahPengeluaran - 1; i++) {
+        for (int j = 0; j < jumlahPengeluaran - i - 1; j++) {
+            // Bandingkan tahun dulu
+            if (daftarPengeluaran[j].tahun > daftarPengeluaran[j + 1].tahun) {
+                swap(daftarPengeluaran[j], daftarPengeluaran[j + 1]);
+            }
+            // Jika tahun sama, bandingkan bulan
+            else if (daftarPengeluaran[j].tahun == daftarPengeluaran[j + 1].tahun) {
+                if (daftarPengeluaran[j].bulan > daftarPengeluaran[j + 1].bulan) {
+                    swap(daftarPengeluaran[j], daftarPengeluaran[j + 1]);
+                }
+                // Jika bulan sama, bandingkan tanggal
+                else if (daftarPengeluaran[j].bulan == daftarPengeluaran[j + 1].bulan) {
+                    if (daftarPengeluaran[j].tanggal > daftarPengeluaran[j + 1].tanggal) {
+                        swap(daftarPengeluaran[j], daftarPengeluaran[j + 1]);
+                    }
+                }
+            }
+        }
+    }
+    
+    // Tampilkan hasil sorting
+    cout << "\n===== DATA PENGELUARAN (TERURUT TANGGAL) =====\n";
+    for (int i = 0; i < jumlahPengeluaran; i++) {
+        cout << "ID: " << daftarPengeluaran[i].id 
+             << " | " << daftarPengeluaran[i].nama 
+             << " | Rp" << daftarPengeluaran[i].nominal
+             << " | " << daftarPengeluaran[i].tanggal << "/" 
+             << daftarPengeluaran[i].bulan << "/" << daftarPengeluaran[i].tahun << endl;
+    }
+}
+
+// FUNGSI VALIDASI TANGGAL
 bool validasiTanggal(int tanggal, int bulan, int tahun) {
-    // Validasi bulan
     if (bulan < 1 || bulan > 12) {
         return false;
     }
     
-    // Validasi tanggal berdasarkan bulan
     if (tanggal < 1 || tanggal > 31) {
         return false;
     }
     
-    // Cek bulan dengan 30 hari
     if ((bulan == 4 || bulan == 6 || bulan == 9 || bulan == 11) && tanggal > 30) {
         return false;
     }
     
-    // Cek bulan Februari
     if (bulan == 2) {
-        // Cek tahun kabisat (sederhana)
         bool kabisat = (tahun % 4 == 0 && tahun % 100 != 0) || (tahun % 400 == 0);
         if (kabisat && tanggal > 29) return false;
         if (!kabisat && tanggal > 28) return false;
